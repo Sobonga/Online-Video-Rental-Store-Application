@@ -1,0 +1,14 @@
+
+apply plugin: 'war'
+
+
+repositories {
+    jcenter()
+}
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.14'
+    compile group: 'javax', name: 'javaee-api', version: '7.0'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+    testCompile 'junit:junit:4.12'
+}
+
