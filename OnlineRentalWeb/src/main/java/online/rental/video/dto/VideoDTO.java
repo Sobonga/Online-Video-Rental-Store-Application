@@ -1,13 +1,18 @@
 package online.rental.video.dto;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "Video")
 public class VideoDTO extends Dto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String movietitle;
     private String description;
     private Double rentalPrice;
-    private List<VideoStatusDTO> videoStatus;
+//    private List<VideoStatusDTO> videoStatus;
 
     public int getId() {
         return id;
@@ -40,12 +45,12 @@ public class VideoDTO extends Dto {
     public void setRentalPrice(Double rentalPrice) {
         this.rentalPrice = rentalPrice;
     }
-
-    public List<VideoStatusDTO> getVideoStatus() {
-        return videoStatus;
-    }
-
-    public void setVideoStatus(List<VideoStatusDTO> videoStatus) {
-        this.videoStatus = videoStatus;
-    }
+//
+//    public List<VideoStatusDTO> getVideoStatus() {
+//        return videoStatus;
+//    }
+//
+//    public void setVideoStatus(List<VideoStatusDTO> videoStatus) {
+//        this.videoStatus = videoStatus;
+//    }
 }

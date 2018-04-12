@@ -1,3 +1,4 @@
+import movierental.controller.RegisterController;
 import online.rental.video.dto.AddressDTO;
 import online.rental.video.util.HibernateUtil;
 import org.hibernate.Session;
@@ -20,16 +21,7 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
 
-        try (PrintWriter writer =response.getWriter()){
-            Session session = HibernateUtil.getSession();
-            Transaction txt= session.beginTransaction();
-            AddressDTO addressDTO =(AddressDTO)session.get(AddressDTO.class,1);
-            writer.println(addressDTO.getId());
-
-            txt.commit();
-        }catch (Exception e){
-            e.printStackTrace(System.out);
-        }
+        RegisterController.Register(request,response);
 
 
 

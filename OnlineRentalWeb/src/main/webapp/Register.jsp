@@ -1,4 +1,4 @@
-<%--
+<%@ page import="movierental.controller.RegisterController" %><%--
   Created by IntelliJ IDEA.
   User: OCTEDVMAX015
   Date: 2018/04/08
@@ -11,7 +11,10 @@
     <title>Registration</title>
 </head>
 <body>
-<form method="post" action="registration.jsp">
+<%if (request.getParameter("name")!=null){
+    RegisterController.Register(request, response);
+}%>
+<form method="post">
     <center>
         <table border="1" width="30%" cellpadding="5">
             <thead>
@@ -22,7 +25,7 @@
             <tbody>
             <tr>
                 <td>First Name</td>
-                <td><input type="text" name="fname" value="" /></td>
+                <td><input type="text" name="name" value="" /></td>
             </tr>
             <tr>
                 <td>Last Name</td>
@@ -34,11 +37,22 @@
             </tr>
             <tr>
                 <td>Phone Number</td>
-                <td><input type="text" name="pnumber" value="" /></td>
+                <td><input type="text" name="number" value="" /></td>
             </tr>
             <tr>
                 <td>Address</td>
-                <td><input type="text" name="address" value="" /></td>
+            <tr>
+                <td>Line 1</td><td><input type="text" name="line1" value="" /></td>
+            </tr>
+            <tr>
+                <td>Line 2</td><td><input type="text" name="line2" value="" /></td>
+            </tr>
+            <tr>
+                <td>Line 3</td><td><input type="text" name="line3" value="" /></td>
+            </tr>
+            <tr>
+                <td>Code</td><td><input type="text" name="zipcode" value="" /></td>
+            </tr>
             </tr>
             <tr>
                 <td>UserName</td>
@@ -47,6 +61,7 @@
             <tr>
                 <td>Password</td>
                 <td><input type="password" name="pass" value="" /></td>
+            </tr>
             </tr>
             <tr>
                 <td><input type="submit" value="Submit" /></td>

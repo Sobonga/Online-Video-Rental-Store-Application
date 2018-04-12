@@ -1,23 +1,31 @@
 package online.rental.video.dto;
 
 
+import javax.persistence.*;
+
+
 public class PersonDTO extends Dto {
 
-    protected int id;
+    //protected int id;
+    @Column
     protected String fName;
+    @Column
     protected String lname;
+    @Column
     protected String email;
+    @Column
     protected String pnumber;
+    @Column
     protected AddressDTO address;
     protected UserDTO user;
 
-    public int getId() {
-        return id;
-    }
+    //public int getId() {
+        //return id;
+   // }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+   // public void setId(int id) {
+        //this.id = id;
+    //}
 
     public String getfName() {
         return fName;
@@ -40,6 +48,7 @@ public class PersonDTO extends Dto {
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
