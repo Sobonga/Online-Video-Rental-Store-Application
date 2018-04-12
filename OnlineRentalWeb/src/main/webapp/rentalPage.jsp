@@ -5,6 +5,7 @@
   Time: 10:38 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%if (request.getParameter("movietitle")!=null){--%>
     <%--VideoController.Videos(request, response);--%>
@@ -14,39 +15,78 @@
     <title>Rental Page</title>
 </head>
 <body>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+
 <form method="post">
-    <TABLE style="background-color: #ECE5B6;" WIDTH="50%">
-        <tr width="100%">
-            <td >Search Movie Title</td>
-            <td ><input type="text" name="name"></td>
+    <%
+        String id = request.getParameter("userId");
+        String driverName = "org.apache.derby.jdbc.ClientDriver";
+        String connectionUrl = "jdbc:derby://localhost:1527/Online Video Rental Application DB";
+        String dbName = "Online Video Rental Application";
+        String userId = "root";
+        String password = "root";
+
+        try {
+            Class.forName("apache_derby_net");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        double count = 0;
+        double rentalprice = 0;
+
+    %>
+    <h2 align="center"><font><strong>Rental Page</strong></font></h2>
+    <table align="center" cellpadding="5" cellspacing="5" border="1">
         </tr>
         <tr>
-            <td width="20%">TROY</td>
-            <td width="25%"><input type="radio" name="troy"
-                                   value="available">Available</td>
-            <td width="30%"><input type="radio" name="troy" value="rented"
-                                   checked>Rented</td>
-            <td width="25%"><input type="radio" name="troy" value="archived">
-                Archived</td>
+            <td><b>Movie_ID</b></td>
+            <td><b>Movie Tittle</b></td>
+            <td><b>Description</b></td>
+            <td><b>Rental Price</b></td>
         </tr>
+        <%
+            try{
+                connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+                statement=connection.createStatement();
+                String sql ="SELECT * FROM video";
+
+                resultSet = statement.executeQuery(sql);
+                while(resultSet.next()){
+        %>
         <tr>
-            <td>Titanic</td>
-            <td><input type="radio" name="titanic" value="available" checked>
-                Available</td>
-            <td><input type="radio" name="titanic" value="rented"> Rented</td>
-            <td><input type="radio" name="titanic" value="archived"> Archived</td>
+
+            <td><%=resultSet.getString("id") %></td>
+            <td><%=resultSet.getString("movietitle") %></td>
+            <td><%=resultSet.getString("description") %></td>
+            <td><%=resultSet.getString("rentalprice") %></td>
         </tr>
+
+        <%
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            count += rentalprice;
+        %>
+    </table>
+    <table align="center" cellpadding="5" cellspacing="5" border="1">
+    <tr>
+    <h3>Total Rental</h3>
+    <td><input type="text" name="rentalprice" value="" /></td>
+    </tr>
         <tr>
-            <td>Avengers</td>
-            <td><input type="radio" name="avengers" value="available" checked>
-                Available</td>
-            <td><input type="radio" name="avengers" value="rented">
-                Rented</td>
-            <td><input type="radio" name="avengers" value="archived"> Archived</td>
+            <td><input type="submit" value="Checkout" /></td>
+            <td><input type="reset" value="Cancel" /></td>
         </tr>
-        <tr><td></td><td></td>
-            <td><input type="submit" name="submit" value="submit"></td></tr>
-    </TABLE>
+    </table>
 </form>
 </body>
 </html>
